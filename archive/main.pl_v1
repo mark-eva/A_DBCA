@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long;
+use File::Copy;
+
+
+our $SOURCE_TEMPLATE_DIR='/oracle/scripts/A_DBCA/db_templates/';
+
+
+
+print "Enter ORACLE_HOME Directory: \n";
+our $ORACLE_HOME = <STDIN>;
+chomp $ORACLE_HOME;
+#================================================================================================================
+#Check if the ORACLE_HOME entered by the user is valid								|=========================
+#================================================================================================================
+our $cmd_valid_home = "ls -altr $ORACLE_HOME| grep -i sqlplus | wc -l";
+our $valid = `$cmd_valid_home`;
+if ($valid == 1)
+{
+	print "oracle home is valid you may proceed \n";
+}
+else
+{
+	print "The directory you entered is not a valid, try again ORACLE_HOME \n";
+	exit ();
+}
+print "Your chosen Oracle_Home is: $ORACLE_HOME \n";
+print "Choose the database Template you want to use \n";
+our $cmd_list_files = "ls -altr $SOURCE_TEMPLATE_DIR";
+our $TARGET_TEMPLATE_DIR="$ORACLE_HOME/assistants/dbca/templates";
+system ($cmd_list_files);
+our $TEMPLATE_CHOICE=<STDIN>;
+print "You have chosen template:$TEMPLATE_CHOICE \n";
+
+
+#================================================================================================================
+#Copy the chosen Template to ORACLE_HOME/dbs                                                                     |===============================
+#================================================================================================================
+
+chomp $SOURCE_TEMPLATE_DIR;
+chomp $TEMPLATE_CHOICE;
+copy("$SOURCE_TEMPLATE_DIR$TEMPLATE_CHOICE","$ORACLE_HOME/assistants/dbca/templates") or die "Copy failed: $!";
+
+
+
+#================================================================================================================
+#Set Config based on user input                                                                                 |===============================
+#================================================================================================================
+
+
+
+
+
+ 

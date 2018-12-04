@@ -1,0 +1,12 @@
+[GENERAL]
+RESPONSEFILE_VERSION = "<version>"
+OPERATION_TYPE = "createDatabase"
+[CREATEDATABASE]
+GDBNAME = "<dbname>"
+SID = "<dbname>"
+TEMPLATENAME = "Fivium_General_Purpose_<version>.dbc"
+SYSPASSWORD = "<password>"
+SYSTEMPASSWORD = "<password>"
+CHARACTERSET ="AL32UTF8"
+AUTOMATICMEMORYMANAGEMENT = "TRUE"
+TOTALMEMORY ="<SGA>"
